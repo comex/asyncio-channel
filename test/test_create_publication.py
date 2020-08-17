@@ -1,3 +1,4 @@
+from .helper import wrap_async_test
 from asyncio_channel import create_channel, create_publication
 
 import asyncio
@@ -5,7 +6,7 @@ import operator
 import pytest
 
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_publication():
     """
     GIVEN
@@ -34,7 +35,7 @@ async def test_publication():
     assert a_ch.is_closed()
     assert not b_ch.is_closed()
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_publication_unsubscribe():
     """
     GIVEN
@@ -64,7 +65,7 @@ async def test_publication_unsubscribe():
     src.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_publication_unsubscribe_all():
     """
     GIVEN
@@ -91,7 +92,7 @@ async def test_publication_unsubscribe_all():
     src.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_publication_unsubscribe_all_on_topic():
     """
     GIVEN

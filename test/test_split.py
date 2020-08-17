@@ -1,10 +1,11 @@
+from .helper import wrap_async_test
 from asyncio_channel import create_channel, split
 
 import asyncio
 import pytest
 
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_split():
     """
     GIVEN

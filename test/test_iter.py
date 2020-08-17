@@ -1,3 +1,4 @@
+from .helper import wrap_async_test
 from asyncio_channel import create_channel, itermerge, iterzip
 
 import asyncio
@@ -5,7 +6,7 @@ import itertools
 import pytest
 import random
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_itermerge():
     """
     GIVEN
@@ -31,7 +32,7 @@ async def test_itermerge():
         results.append(x)
     assert tuple(results) == seq
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_iterzip():
     """
     GIVEN

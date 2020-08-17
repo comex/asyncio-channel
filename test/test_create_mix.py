@@ -1,3 +1,4 @@
+from .helper import wrap_async_test
 from asyncio_channel import create_channel, create_mix
 
 import asyncio
@@ -5,7 +6,7 @@ import pytest
 import re
 
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mix_property():
     """
     GIVEN
@@ -25,7 +26,7 @@ async def test_mix_property():
     ch.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mix_property_invalid():
     """
     GIVEN
@@ -42,7 +43,7 @@ async def test_mix_property_invalid():
     ch.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mix():
     """
     GIVEN
@@ -68,7 +69,7 @@ async def test_mix():
     out.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mix_unmix():
     """
     GIVEN
@@ -96,7 +97,7 @@ async def test_mix_unmix():
     out.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mix_mute():
     """
     GIVEN
@@ -125,7 +126,7 @@ async def test_mix_mute():
     out.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mix_pause():
     """
     GIVEN
@@ -155,7 +156,7 @@ async def test_mix_pause():
     out.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mix_priority_mute():
     """
     GIVEN
@@ -187,7 +188,7 @@ async def test_mix_priority_mute():
     out.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mix_priority_pause():
     """
     GIVEN
@@ -219,7 +220,7 @@ async def test_mix_priority_pause():
     out.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mix_remove_all_inputs():
     """
     GIVEN
@@ -244,7 +245,7 @@ async def test_mix_remove_all_inputs():
     out.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mix_toggle_error_cases():
     """
     WHEN
@@ -277,7 +278,7 @@ async def test_mix_toggle_error_cases():
     out.close()
     await asyncio.sleep(0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mix_restart():
     """
     GIVEN
@@ -303,7 +304,7 @@ async def test_mix_restart():
     out.close()
     await asyncio.sleep(0.05)  # Give mix a chance to clean up.
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_mute_restart():
     """
     GIVEN

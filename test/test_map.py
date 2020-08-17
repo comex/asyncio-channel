@@ -1,3 +1,4 @@
+from .helper import wrap_async_test
 from asyncio_channel import create_channel, map
 
 import asyncio
@@ -5,7 +6,7 @@ import operator
 import pytest
 
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_map():
     """
     GIVEN

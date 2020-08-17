@@ -1,3 +1,4 @@
+from .helper import wrap_async_test
 from asyncio_channel import ProhibitedOperationError, create_channel, \
                             shield_from_close, shield_from_read, \
                             shield_from_write
@@ -6,7 +7,7 @@ import asyncio
 import pytest
 
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_shield_from_close_forwarding():
     """
     GIVEN
@@ -39,7 +40,7 @@ async def test_shield_from_close_forwarding():
     await asyncio.wait_for(dch.closed(), timeout=0.1)
     assert dch.is_closed()
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_shield_from_read_forwarding():
     """
     GIVEN
@@ -72,7 +73,7 @@ async def test_shield_from_read_forwarding():
     await asyncio.wait_for(dch.closed(), timeout=0.1)
     assert dch.is_closed()
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_shield_from_write_forwarding():
     """
     GIVEN
@@ -123,7 +124,7 @@ def test_shield_from_close():
     with pytest.raises(ProhibitedOperationError, match='close'):
         dch.close()
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_shield_from_read():
     """
     GIVEN
@@ -149,7 +150,7 @@ async def test_shield_from_read():
     with pytest.raises(ProhibitedOperationError, match='take'):
         await dch.take()
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_shield_from_write():
     """
     GIVEN
@@ -175,7 +176,7 @@ async def test_shield_from_write():
     with pytest.raises(ProhibitedOperationError, match='put'):
         await dch.put('b')
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_shield_combined():
     """
     GIVEN

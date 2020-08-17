@@ -1,3 +1,4 @@
+from .helper import wrap_async_test
 from asyncio_channel._sliding_queue import SlidingQueue
 
 import asyncio
@@ -36,7 +37,7 @@ def test_put_nowait_full():
     sb.put_nowait(b)
     assert sb.get_nowait() == b
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_put():
     """
     GIVEN
@@ -52,7 +53,7 @@ async def test_put():
     await asyncio.wait_for(sb.put(a), timeout=0.05)
     assert sb.get_nowait() == a
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_put_full():
     """
     GIVEN

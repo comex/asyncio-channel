@@ -1,3 +1,4 @@
+from .helper import wrap_async_test
 from asyncio_channel import create_channel
 from asyncio_channel._pipe import pipe
 
@@ -5,7 +6,7 @@ import asyncio
 import pytest
 
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_pipe_close_false():
     """
     GIVEN
@@ -23,7 +24,7 @@ async def test_pipe_close_false():
     with pytest.raises(asyncio.TimeoutError):
         await asyncio.wait_for(dest.closed(), timeout=0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_pipe_close_true():
     """
     GIVEN
@@ -40,7 +41,7 @@ async def test_pipe_close_true():
     await asyncio.wait_for(src.closed(), timeout=0.05)
     await asyncio.wait_for(dest.closed(), timeout=0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_pipe():
     """
     WHEN
@@ -58,7 +59,7 @@ async def test_pipe():
     src.close()
     await asyncio.wait_for(dest.closed(), timeout=0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_pipe_close():
     """
     GIVEN

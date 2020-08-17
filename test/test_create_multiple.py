@@ -1,10 +1,11 @@
+from .helper import wrap_async_test
 from asyncio_channel import create_channel, create_multiple
 
 import asyncio
 import pytest
 
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_multiple_closed():
     """
     GIVEN
@@ -21,7 +22,7 @@ async def test_multiple_closed():
     ch = create_channel()
     assert not m.add_output(ch)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_add_output():
     """
     GIVEN
@@ -48,7 +49,7 @@ async def test_add_output():
     with pytest.raises(asyncio.TimeoutError):
         await asyncio.wait_for(out2.closed(), timeout=0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_remove_output():
     """
     GIVEN
@@ -76,7 +77,7 @@ async def test_remove_output():
     with pytest.raises(asyncio.TimeoutError):
         await asyncio.wait_for(out1.closed(), timeout=0.05)
 
-@pytest.mark.asyncio
+@wrap_async_test
 async def test_remove_all_outputs():
     """
     GIVEN
