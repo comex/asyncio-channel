@@ -18,6 +18,9 @@ def _range_from(start, end, at, *, _chain=chain):
     >>> list(_range_from(start=0, end=10, at=7))
     [7, 8, 9, 0, 1, 2, 3, 4, 5, 6]
     """
+    if start == end:
+        return [] # regardless of `at`
+    assert start <= at <= end
     return _chain(range(at, end), range(start, at))
 
 
