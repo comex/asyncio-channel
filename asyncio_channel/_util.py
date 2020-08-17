@@ -15,6 +15,8 @@ async def wait_all(
     Returns two tuples: completed tasks, pending tasks.  If timeout is
     provided then completed tasks set may be empty.
     """
+    if not coros_or_tasks:
+        return (), ()
     tasks = tuple(
         ct if isinstance(ct, Task) else create_task(ct)
         for ct in coros_or_tasks)
@@ -45,6 +47,8 @@ async def wait_first(
     Returns two tuples: completed tasks, pending tasks.  If timeout is
     provided then completed tasks set may be empty.
     """
+    if not coros_or_tasks:
+        return (), ()
     tasks = tuple(
         ct if isinstance(ct, Task) else create_task(ct)
         for ct in coros_or_tasks)
