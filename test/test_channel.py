@@ -1,4 +1,4 @@
-from .helper import wrap_async_test
+from .helper import wrap_async_test, expect_cancelled
 from asyncio_channel._channel import Channel
 
 import asyncio
@@ -532,7 +532,7 @@ async def test_capacity_next_reblocks():
     asyncio.get_running_loop().call_later(0.05, ch.poll)
     with pytest.raises(asyncio.TimeoutError):
         await asyncio.wait_for(
-            asyncio.gather(put_item(), ch.capacity()),
+            expect_cancelled(asyncio.gather(put_item(), ch.capacity())),
             timeout=0.1)
     # Verify that new item was put and unblock the second coroutine.
     assert await ch.take() == b
@@ -639,7 +639,7 @@ async def test_item_next_reblocks():
     asyncio.get_running_loop().call_later(0.05, ch.offer, 'a')
     with pytest.raises(asyncio.TimeoutError):
         await asyncio.wait_for(
-            asyncio.gather(take_item(), ch.item()),
+            expect_cancelled(asyncio.gather(take_item(), ch.item())),
             timeout=0.1)
     assert ch.empty()
     await ch.put('b')  # Unblock the second coroutine.

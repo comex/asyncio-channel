@@ -1,4 +1,4 @@
-import functools, asyncio
+import functools, asyncio, pytest
 
 def wrap_async_test(f):
     @functools.wraps(f)
@@ -17,3 +17,7 @@ def wrap_async_test(f):
             raise first_exception
         return ret
     return wrapped
+
+async def expect_cancelled(coro):
+    with pytest.raises(asyncio.CancelledError):
+        return await coro
